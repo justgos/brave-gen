@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package worldgen;
+
+message Vector2_ {
+  float x = 1;
+  float y = 2;
+}
+message Vector3_ {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message MapRequest {
+  float scale = 1;
+  repeated int32 blocks_xz = 2;
+  int32 tex_size = 3;
+  Vector3_ block_size = 4;
+}
+
+message TreeData {
+  Vector3_ pos = 1;
+  Vector3_ rot = 2;
+  int32 type = 3;
+  int32 seed = 4;
+}
+
+message Mesh_ {
+  int32 id = 1;
+  repeated Vector3_ verts = 2;
+  repeated Vector2_ uvs = 3;
+  repeated int32 faces = 4;
+}
+
+message Prop {
+  int32 mesh_id = 1;
+  Vector3_ pos = 2;
+  Vector3_ rot = 3;
+}
+
+message MapBlock {
+  repeated int32 heightmap_shape = 1;
+  repeated float heightmap = 2;
+  repeated int32 biomes_shape = 3;
+  repeated float biomes = 4;
+  float sea_level = 5;
+  Vector3_ pos = 6;
+  repeated int32 idx = 7;
+  repeated TreeData trees = 8;
+  repeated Prop props = 9;
+}
+
+message MapData {
+  repeated Mesh_ meshes = 1;
+  repeated MapBlock blocks = 10;
+}
+
+message SimulationFrame {
+  repeated float humidity = 1;
+  repeated float precipitation = 2;
+  repeated float temperature = 3;
+}
+
+message SimulationData {
+  repeated int32 sim_shape = 1;
+  repeated SimulationFrame frames = 10;
+}
+
+service WorldGen {
+  rpc GetMap (MapRequest) returns (MapData) {}
+}
+
+/*message NetMessage {
+  enum NetMessageType {
+    GET_MAP = 0;
+    MAP = 1;
+  }
+
+  NetMessageType type = 1;
+
+  MapRequest map_request = 2;
+  MapData map = 3;
+}*/
