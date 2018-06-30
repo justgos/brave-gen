@@ -1,0 +1,12 @@
+.ipynb_checkpoints
+__pycache__
+python/envs
+unity/Library/
+unity/build/
+unity/Temp/
+unity/bin/
+unity/MAPI/
+unity/obj/
+unity/.vs/
+unity/Packages
+*.log

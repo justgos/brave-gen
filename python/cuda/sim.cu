@@ -271,7 +271,7 @@ __global__ void temperature_flux(float *temperature, float *next_temperature, fl
     float time_flux = 1.0f; //max(sin(sim_time * 0.03f + float(i) * 0.02f), 0.0f); //  + float(j) * 0.008f
     //time_flux = (sin(sim_time * 0.1f) + 1.0f) / 2.0f;
     time_flux = (0.1f + 0.9f * (float(j) / %(sim_h)s)) // Sphericity - poles are colder
-                * (sin(sim_time * 0.1f + float(i) * 0.02f) + 1.0f) / 2.0f; // Day-night cycles\
+                * (sin(sim_time * 0.1f + float(i) * 0.02f) + 1.0f) / 2.0f; // Day-night cycles
     if(make_ground_height(i, j, surface_height) >= %(sea_level)s) {
         // How much rain in this column?
         float col_precipitation = 0.0f;
